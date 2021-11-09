@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: node-app
+    app.kubernetes.io/instance: node-app-instance
+    app.kubernetes.io/version: '1.21'
+    app.kubernetes.io/managed-by: kubectl
+  name: node-app-demo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+        - image: 514905649684.dkr.ecr.us-east-1.amazonaws.com/kaholo-test-new:latest
+          imagePullPolicy: Always
+          name: node-app
+          ports:
+            - containerPort: 8080
